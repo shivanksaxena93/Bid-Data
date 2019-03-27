@@ -1,0 +1,43 @@
+import java.sql.*;
+
+public class Temperature 
+
+{
+
+public static void main(String args[])
+
+{
+
+try
+
+{
+
+Class.forName("com.mysql.jdbc.Driver");
+
+Connection con=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/itmd521","root","itmd521");
+
+Statement stmt=con.createStatement();
+
+ResultSet rs=stmt.executeQuery("Select tempofair from records where tempofair=(select max(tempofair)from records where tempofair>"+99+" and tempofair!="+9999+");");
+
+while(rs.next()){
+
+int Temp=Integer.parseInt(rs.getString(1));
+
+System.out.println("1985's Maximum temperautre is :"+Temp);
+
+
+
+}
+
+con.close();
+
+}
+
+catch(Exception e){ System.out.println(e);}
+
+}
+
+}
+
+ 
